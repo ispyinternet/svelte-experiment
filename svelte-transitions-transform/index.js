@@ -28,7 +28,8 @@ export default function transform( node,
   let matrix = '';
   
   if(tr == '' || tr == "none") {
-    or = new Transform3d().matrix3d();
+    console.log("none");
+    or = new Transform3d().matrix3d(1,0,0,0,0,1,0,.000001,0,0,1,0,0,0,1,1);
   } else {
     
     if(/^matrix3d.*/.test(tr)) {
@@ -77,6 +78,7 @@ export default function transform( node,
     }
   }
   const to = new Transform3d().
+	  matrix3d().	  
 	  scaleX(scaleX).
 	  scaleY(scaleY).
 	  scaleZ(scaleZ).

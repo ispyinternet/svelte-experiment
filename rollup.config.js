@@ -9,7 +9,7 @@ export default {
   entry: 'index.js',
   dest: 'build.js',
   format: 'umd',
-  sourceMap: 'inline',
+  sourceMap: false,
   plugins: [
     resolve({
       browser: true,
