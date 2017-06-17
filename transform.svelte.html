@@ -4,7 +4,7 @@
 </label>
 {{#if visible}}
 <div transition:fade='{duration:2000}'>
-  <div  transition:transform='{rotateX:-170, translateY:-140, scaleX:.8,scaleY:.8,scaleZ:.8, rotateY:-100, duration:800 }' style='transform:rotateY(0.1deg)'>
+  <div  transition:transform='{rotateX:-170, translateY:-140, scaleX:.8,scaleY:.8,scaleZ:.8, rotateY:-100, duration:800 }' style='transform:rotateX(0) translateX(200px)'>
     <h1>Hey look at me rolling and fading.</h1>
     <p>but take the style tag out of the above tag and recompile and we lose the rotateY. Also with rotateY(0deg) in the style tag it breaks.</p>
     <p>Also cant add 2 transitions to an element so had to wrap 1 transition in another, which gives an odd result</p>

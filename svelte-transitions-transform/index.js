@@ -31,32 +31,33 @@ export default function transform( node,
     or = new Transform3d().matrix3d();
   } else {
     
-    if(!/^matrix3d.*/.test(tr)) {
+    if(/^matrix3d.*/.test(tr)) {
       matrix = tr.substr(9,tr.length-10).split(", ").map(parseFloat);
-      console.log(matrix.length);
-      for(let i = matrix.length || 0; i < 16; i++) {
-//	matrix.push(0.1);
-      }
-      or = new Transform3d().matrix3d(matrix[0],
-				      matrix[1],
-				      matrix[2],
-				      matrix[3],
-				      matrix[4],
-				      matrix[5],
-				      matrix[6],
-				      matrix[7],
-				      matrix[8],
-				      matrix[9],
-				      matrix[10],
-				      matrix[11],
-				      matrix[12],
-				      matrix[13],
-				      matrix[14],
-				      matrix[15] );
-      
     } else {
-      matrix = tr.substr(7,tr.length-8).split(", ").map(parseFloat);
-      
+      matrix = tr.substr(7,tr.length-7).split(", ").map(parseFloat);
+    }
+    if(matrix.length==6) {
+      matrix = [
+	matrix[0],
+	matrix[1],
+	0,
+	0,
+	matrix[2],
+	matrix[3],
+	0,
+	0,
+	0,
+	0,
+	1,
+	0,
+	matrix[4],
+	matrix[5],
+	0,
+	1];
+    }
+    if(matrix.length!==16) {
+      or = new Transform3d().matrix3d();
+    } else {
       or = new Transform3d().matrix3d(matrix[0],
 				      matrix[1],
 				      matrix[2],
@@ -75,7 +76,6 @@ export default function transform( node,
 				      matrix[15] );
     }
   }
-
   const to = new Transform3d().
 	  scaleX(scaleX).
 	  scaleY(scaleY).
